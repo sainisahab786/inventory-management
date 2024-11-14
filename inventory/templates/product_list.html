@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Product List</h2>
+{% if request.user.is_superuser %}
+    <a href="{% url 'product_add' %}">Add New Product</a>
+{% endif %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>SKU</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        {% if request.user.is_superuser %}
+            <th>Actions</th>
+        {% endif %}
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }}</td>
+        {% if request.user.is_superuser %}
+            <td>
+                <a href="{% url 'product_edit' product.pk %}">Edit</a>
+                <a href="{% url 'product_delete' product.pk %}">Delete</a>
+            </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Low Stock Alerts</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+    {% for product in low_stock_products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.quantity }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'product_list' %}">Back to Products</a>
+{% endblock %}
